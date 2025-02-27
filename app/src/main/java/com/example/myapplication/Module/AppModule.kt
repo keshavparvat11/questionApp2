@@ -1,5 +1,6 @@
 package com.example.myapplication.Module
 
+import com.example.myapplication.Repository.QuestionRepository
 import com.example.myapplication.util.QuestionApi
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,12 @@ import javax.inject.Singleton
 object AppModule {
     @Singleton
     @Provides
-    suspend fun ProvideQuestionApi(): QuestionApi{
+    fun provideQuestionRepository(api: QuestionApi) = QuestionRepository(api)
+
+
+    @Singleton
+    @Provides
+  fun provideQuestionApi(): QuestionApi{
         return Retrofit.Builder()
             .baseUrl(Constent.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

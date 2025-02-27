@@ -7,5 +7,5 @@ import javax.inject.Singleton
 @Singleton
 interface QuestionApi {
     @GET("geography.json")
-    suspend fun getAllQuestions(): Question
+   fun getAllQuestions(): Question
 }
