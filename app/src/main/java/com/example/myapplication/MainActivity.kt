@@ -33,8 +33,19 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 fun MyApp(viewMode: QuestionVivemodel = hiltViewModel()){
-    Text("heeooo")
-    Log.d("TAG", "MyApp: ${viewMode.data.value.data.toString()}")
+    Questions(viewMode)
+}
+@Composable
+fun Questions(viewMode: QuestionVivemodel){
+    val question = viewMode.data.value.data?.toMutableList()
+  if (viewMode.data.value.loading == true) {
+      Log.d("Loadingg", "Questions: Lodinnnnnnng")
+  } else{
+      Log.d("Loadingg", "Questions: ${question?.size} ......")
+      question?.forEach{
+          Log.d("Loadingg", "Questions: ${it.question}")
+      }
+  }
 
 }
 
