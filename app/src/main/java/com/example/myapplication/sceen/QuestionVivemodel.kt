@@ -7,22 +7,28 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.Data.DataOrException
 import com.example.myapplication.Repository.QuestionRepository
 import com.example.myapplication.questions.QuestionItem
+import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class QuestionVivemodel @Inject constructor(
-    private val repository: QuestionRepository) : ViewModel() {
+class QuestionVivemodel @Inject constructor(private val repository: QuestionRepository) : ViewModel() {
    val data: MutableState<DataOrException<ArrayList<QuestionItem>, Boolean, Exception>> =
         mutableStateOf(DataOrException(null, true, Exception("")))
-    init {
-        getAllQuestion()
+
+
+
+    val _subject = mutableStateOf("")
+
+    fun setSubject(subject: String) {
+        _subject.value = subject
+        getAllQuestion(subject)
     }
-    private fun getAllQuestion(){
+    private fun getAllQuestion(subject :String){
         viewModelScope.launch {
             data.value.loading = true
-            data.value = repository.getAllQuestions()
+            data.value = repository.getAllQuestions(subject)
             if (data.value.data.toString().isNotEmpty()) {
                 data.value.loading = false
             }

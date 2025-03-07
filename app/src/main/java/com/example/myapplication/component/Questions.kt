@@ -101,13 +101,21 @@ fun DisplayQuestions(question: QuestionItem,
     }
     Surface(modifier = Modifier.fillMaxWidth()
         .fillMaxHeight()
-        .padding(10.dp), color = AppColors.mDarkPurple) {
+        , color = AppColors.mDarkPurple) {
         Column(modifier = Modifier.padding(12.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start) {
             if (questionIndex.value >= 1) scoreBar(questionIndex.value)
             quetionTracker(curr = questionIndex.value, outOf = viewModel.getTotalQuestionCount())
             DoatedLine(PathEffect.dashPathEffect(floatArrayOf(10f,10f),0f))
+            Text(text = question.category,
+                modifier = Modifier
+                    .padding(6.dp),
+                color = AppColors.mOffWhite,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                lineHeight = 22.sp
+            )
             Column {
                 Text(text =question.question,
                     modifier = Modifier.padding(6.dp)
