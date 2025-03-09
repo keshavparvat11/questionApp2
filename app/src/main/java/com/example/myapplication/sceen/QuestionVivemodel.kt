@@ -1,5 +1,6 @@
 package com.example.myapplication.sceen
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,7 @@ class QuestionVivemodel @Inject constructor(private val repository: QuestionRepo
             data.value = repository.getAllQuestions(subject)
             if (data.value.data.toString().isNotEmpty()) {
                 data.value.loading = false
+                Log.d("ViewModel", "Questions fetched:")
             }
         }
 

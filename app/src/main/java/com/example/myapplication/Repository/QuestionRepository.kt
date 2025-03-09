@@ -18,7 +18,8 @@ class QuestionRepository @Inject constructor(private val api: QuestionApi)  {
               if (questionList.data.toString().isNotEmpty()) questionList.loading = false
           }catch (exception: Exception){
               questionList.exception = exception
-              Log.d("Exccc", "getAllQuestions: ${questionList.exception!!.localizedMessage}")
+              questionList.loading = false
+              Log.e("API_ERROR", "Failed to fetch questions: ", exception)
           }
         return questionList
     }

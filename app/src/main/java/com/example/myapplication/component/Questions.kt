@@ -60,10 +60,7 @@ fun Questions(viewMode: QuestionVivemodel){
     val questionIndex = remember {
         mutableStateOf(0)
     }
-    if (viewMode.data.value.loading == true) {
-        CircularProgressIndicator()
-        Log.d("Loadingg", "Questions: Lodinnnnnnng")
-    } else{
+
         if (question != null)
         {
             val question = question[questionIndex.value]
@@ -71,7 +68,7 @@ fun Questions(viewMode: QuestionVivemodel){
                 questionIndex.value = questionIndex.value + 1
             }
         }
-    }
+
 
 }
 
